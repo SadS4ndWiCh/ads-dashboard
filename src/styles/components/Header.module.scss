@@ -1,0 +1,17 @@
+@import '../variables';
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: 4rem;
+
+    color: $clr-text-primary;
+  }
+
+  p {
+    font-size: 1.6rem;
+    color: $clr-text-secundary;
+  }
+}
