@@ -20,7 +20,7 @@ const Home: NextPage = () => {
           icon="📒"
         />
         <IconLink
-          href="/schedules"
+          href="/horaries"
           label="Horários"
           icon="⏰"
         />
