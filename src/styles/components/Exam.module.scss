@@ -1,0 +1,52 @@
+@import '../variables';
+
+.examContainer {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  padding: .8rem 1.4rem;
+
+  border-radius: .5rem;
+
+  background-color: #fff;
+
+  > span {
+    font-size: 2.3rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+  
+    color: $clr-text-primary;
+  }
+
+  p {
+    font-size: 2rem;
+    font-weight: 500;
+  
+    color: $clr-text-primary;
+  }
+
+  small {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: $clr-text-secundary;
+
+    strong {
+      display: inline-block;
+      margin-top: 1rem;
+
+      color: $clr-text-primary;
+    }
+  }
+}
+
+.separator {
+  width: .1rem;
+  height: 1.4rem;
+
+  margin: 0 .9rem;
+
+  background-color: rgba($gray, .21);
+}
