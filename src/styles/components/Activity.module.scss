@@ -1,0 +1,50 @@
+@import '../variables';
+
+.activityContainer {
+  position: relative;
+  width: 100%;
+
+  padding: 1.3rem;
+
+  border-radius: .5rem;
+
+  background-color: #fff;
+
+  overflow: hidden;
+
+  strong {
+    font-size: 1.9rem;
+
+    color: $clr-text-primary;
+  }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    color: $clr-text-secundary;
+  }
+
+  small {
+    display: inline-block;
+
+    margin-top: 1.3rem;
+
+    font-size: 1.3rem;
+    font-weight: 700;
+
+    color: $clr-text-secundary;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: .3rem;
+    height: 100%;
+
+    background-color: var(--importanceColor);
+  }
+}
