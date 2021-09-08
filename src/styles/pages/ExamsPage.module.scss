@@ -1,0 +1,9 @@
+@use '../formats';
+
+.container {
+  @include formats.page;
+
+  main > div {
+    margin-bottom: 1.3rem;
+  }
+}
