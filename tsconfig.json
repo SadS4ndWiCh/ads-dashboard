@@ -19,6 +19,7 @@
       "@styles/*": ["src/styles/*"],
       "@pages/*": ["src/pages/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@lib/*": ["src/lib/*"],
       "@public/*": ["public/*"],
     }
   },
