@@ -25,3 +25,10 @@ html {
 a {
   text-decoration: none;
 }
+
+a.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+
+  filter: brightness(.8);
+}
