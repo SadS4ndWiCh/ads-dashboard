@@ -15,22 +15,22 @@ const Home: NextPage = () => {
 
       <main>
         <IconLink
-          href="/"
+          href="/classes"
           label="Aulas de hoje"
           icon="📒"
         />
         <IconLink
-          href="/"
+          href="/schedules"
           label="Horários"
           icon="⏰"
         />
         <IconLink
-          href="/"
+          href="/activities"
           label="Atividades"
           icon="📚"
         />
         <IconLink
-          href="/"
+          href="/exams"
           label="Provas"
           icon="🧾"
         />
@@ -38,13 +38,13 @@ const Home: NextPage = () => {
         <hr />
 
         <IconLink
-          href="/"
+          href="/notices"
           label="Avisos"
           icon="🔔"
         />
         
         <IconLink
-          href="/"
+          href="/reminders"
           label="Lembretes"
           icon="❗"
         />
