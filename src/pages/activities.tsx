@@ -5,6 +5,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import { useDebounce } from '@hooks/useDebounce';
 
 import { Header } from '@components/Header';
+import { SearchInput } from '@components/SearchInput';
 import { Activity } from '@components/Activity';
 
 import styles from '@styles/pages/ActivitiesPage.module.scss';
@@ -54,9 +55,8 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
         description="Listagem das atividades atuais para serem feitas"
       />
 
-      <input
-        type="text"
-        placeholder="Pesquisar atividade"
+      <SearchInput
+        placeholder="Pesquisar atividades"
         onChange={(e) => setSearchValue(e.target.value)}
       />
 
