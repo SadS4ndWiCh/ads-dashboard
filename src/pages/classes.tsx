@@ -1,5 +1,7 @@
 import type { GetStaticProps, NextPage } from 'next';
 
+import { api } from '@lib/axios';
+
 import { Header } from '@components/Header';
 import { ClassSchedule } from '@components/ClassSchedule';
 
@@ -11,10 +13,13 @@ interface IClassSchedule {
 }
 
 type ClassesPageProps = {
-  classesSchedules: IClassSchedule[],
+  data: {
+    label: string,
+    classesSchedules: IClassSchedule[],
+  }
 };
 
-const ClassesPage: NextPage<ClassesPageProps> = ({ classesSchedules }: ClassesPageProps) => {
+const ClassesPage: NextPage<ClassesPageProps> = ({ data }: ClassesPageProps) => {
   return (
     <div className={styles.container}>
       <Header
@@ -23,7 +28,8 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ classesSchedules }: ClassesPa
       />
 
       <main>
-        { classesSchedules.map((classSchedule, i) => (
+        <h3>{ data.label }</h3>
+        { data.classesSchedules.map((classSchedule, i) => (
           <ClassSchedule
             key={`class-${i}`}
             startTime={classSchedule.startTime}
@@ -36,15 +42,11 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ classesSchedules }: ClassesPa
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const classesSchedules: IClassSchedule[] = [
-    { startTime: '7:40', classSubjectName: 'Sem aula' },
-    { startTime: '9:30', classSubjectName: 'Inglês' },
-    { startTime: '11:10', classSubjectName: 'Arquitetura e Organização de Computadores' },
-  ];
-  
+  const { data } = await api.get('/horaries?type=today');
+
   return {
     props: {
-      classesSchedules
+      data,
     }
   }
 }

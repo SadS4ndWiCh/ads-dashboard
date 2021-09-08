@@ -1,5 +1,7 @@
 import type { GetStaticProps, NextPage } from 'next';
 
+import { api } from '@lib/axios';
+
 import { Header } from '@components/Header';
 import { ClassSchedule } from '@components/ClassSchedule';
 
@@ -45,53 +47,7 @@ const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const horaries: IHorary[] = [
-    {
-      id: 0,
-      label: 'Segunda',
-      classesSchedules: [
-        { startTime: '7:40', classSubjectName: 'Sem aula' },
-        { startTime: '9:30', classSubjectName: 'Inglês' },
-        { startTime: '11:10', classSubjectName: 'Arquitetura e Organização de Computadores' },
-      ]
-    },
-    {
-      id: 1,
-      label: 'Terça',
-      classesSchedules: [
-        { startTime: '7:40', classSubjectName: 'Sem aula' },
-        { startTime: '9:30', classSubjectName: 'Inglês' },
-        { startTime: '11:10', classSubjectName: 'Arquitetura e Organização de Computadores' },
-      ],
-    },
-    {
-      id: 2,
-      label: 'Quarta',
-      classesSchedules: [
-        { startTime: '7:40', classSubjectName: 'Sem aula' },
-        { startTime: '9:30', classSubjectName: 'Inglês' },
-        { startTime: '11:10', classSubjectName: 'Arquitetura e Organização de Computadores' },
-      ],
-    },
-    {
-      id: 3,
-      label: 'Quinta',
-      classesSchedules: [
-        { startTime: '7:40', classSubjectName: 'Sem aula' },
-        { startTime: '9:30', classSubjectName: 'Inglês' },
-        { startTime: '11:10', classSubjectName: 'Arquitetura e Organização de Computadores' },
-      ],
-    },
-    {
-      id: 4,
-      label: 'Sexta',
-      classesSchedules: [
-        { startTime: '7:40', classSubjectName: 'Sem aula' },
-        { startTime: '9:30', classSubjectName: 'Inglês' },
-        { startTime: '11:10', classSubjectName: 'Arquitetura e Organização de Computadores' },
-      ],
-    },
-  ];
+  const { data: horaries } = await api.get('/horaries?type=all');
 
   return {
     props: {
