@@ -1,0 +1,43 @@
+@import '../variables';
+
+.classScheduleContainer {
+  display: flex;
+  align-items: center;
+
+  border-radius: 1.3rem;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+
+  background-color: #fff;
+
+  overflow: hidden;
+
+  span, p {
+    font-size: 1.738rem;
+    color: $clr-text-primary;
+  }
+
+  p {
+    margin-left: 1.1rem;
+  }
+}
+
+.classScheduleStart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 7.2rem;
+  height: 7.2rem;
+
+  border-radius: 1.3rem;
+  
+  background-color: rgb($gray, .21);
+  
+  span {
+    font-weight: 600;
+  }
+  
+}
