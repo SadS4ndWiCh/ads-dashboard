@@ -25,6 +25,7 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ data }: ClassesPageProps) => 
       <Header
         title="Aulas de hoje"
         description="Listagem das aulas do dia e seu horário de início"
+        backTo="/"
       />
 
       <main>

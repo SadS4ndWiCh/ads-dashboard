@@ -28,15 +28,11 @@ const Home: NextPage = () => {
           href="/activities"
           label="Atividades"
           icon="📚"
-          className='disabled'
-          title="Em breve"
         />
         <IconLink
           href="/exams"
           label="Provas"
           icon="🧾"
-          className='disabled'
-          title="Em breve"
         />
 
         <hr />
@@ -45,16 +41,12 @@ const Home: NextPage = () => {
           href="/notices"
           label="Avisos"
           icon="🔔"
-          className='disabled'
-          title="Em breve"
         />
         
         <IconLink
           href="/reminders"
           label="Lembretes"
           icon="❗"
-          className='disabled'
-          title="Em breve"
         />
 
       </main>

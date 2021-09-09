@@ -28,6 +28,7 @@ const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
       <Header
         title="Horários"
         description="Listagem do cronograma completo da semana"
+        backTo="/"
       />
 
       { horaries.map((horary, i) => (
