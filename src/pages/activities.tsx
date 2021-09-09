@@ -81,25 +81,12 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
 
 export const getStaticProps: GetStaticProps = async () => {
   const activities = await getActivities();
-  /* const activities: IActivities[] = [
-    { 
-      importanceLevel: 'normal',
-      activityName: 'Administração Geral',
-      activityDescription: 'Realizar a lista de atividades que está no Teams',
-      finishDate: '21/09',
-    },
-    { 
-      importanceLevel: 'important',
-      activityName: 'Arquitetura e Organização de Computadores',
-      activityDescription: 'Escrever o artigo sobre o assunto escolhido',
-      finishDate: '12/09'
-    },
-  ] */
   
   return {
     props: {
       activities: activities
-    }
+    },
+    revalidate: 60 * 60 // A cada 1 hora
   }
 }
 
