@@ -47,11 +47,11 @@ const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: horaries } = await api.get('/horaries?type=all');
+  const { data } = await api.get('/horaries?type=all');
 
   return {
     props: {
-      horaries
+      horaries: data || []
     }
   }
 }
