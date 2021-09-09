@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 
 import type { GetStaticProps, NextPage } from 'next';
 
+import { getActivities } from '@lib/ads';
+
 import { useDebounce } from '@hooks/useDebounce';
 
 import { Header } from '@components/Header';
@@ -53,6 +55,7 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
       <Header
         title="Atividades"
         description="Listagem das atividades atuais para serem feitas"
+        backTo="/"
       />
 
       <SearchInput
@@ -77,7 +80,8 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const activities: IActivities[] = [
+  const activities = await getActivities();
+  /* const activities: IActivities[] = [
     { 
       importanceLevel: 'normal',
       activityName: 'Administração Geral',
@@ -90,11 +94,11 @@ export const getStaticProps: GetStaticProps = async () => {
       activityDescription: 'Escrever o artigo sobre o assunto escolhido',
       finishDate: '12/09'
     },
-  ]
+  ] */
   
   return {
     props: {
-      activities
+      activities: activities
     }
   }
 }
