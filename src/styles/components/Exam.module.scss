@@ -2,7 +2,7 @@
 
 .examContainer {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
   width: 100%;
 
@@ -35,10 +35,28 @@
 
     strong {
       display: inline-block;
-      margin-top: 1rem;
 
       color: $clr-text-primary;
     }
+  }
+}
+
+.examTags {
+  display: flex;
+  gap: .5rem;
+
+  margin-top: 1rem;
+
+  span {
+    padding: .2rem 1.5rem;
+
+    border-radius: .8rem;
+
+    font-size: 1.4rem;
+    text-transform: uppercase;
+
+    color: #fff;
+    background-color: #674FFF;
   }
 }
 
