@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 
-import { api } from '@lib/axios';
+import { getHoraries } from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { ClassSchedule } from '@components/ClassSchedule';
@@ -42,11 +42,11 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ data }: ClassesPageProps) => 
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get('/horaries?type=today');
+  const data = getHoraries('today');
 
   return {
     props: {
-      data: data || [],
+      data: data,
     }
   }
 }
