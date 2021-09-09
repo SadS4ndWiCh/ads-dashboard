@@ -1,6 +1,13 @@
 {
   "name": "ADS Dashboard",
   "short_name": "ADS",
+  "description": "Centralizar informações da faculdade em um só lugar para ficar mais organizado e pela facilidade de acessar",
+  "theme_color": "#ffffff",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "lang": "pt-BR",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -12,8 +19,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  ]
 }
