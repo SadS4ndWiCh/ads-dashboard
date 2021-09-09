@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import type { GetStaticProps, NextPage } from 'next';
 
+import { getExams } from '@lib/ads';
+
 import { useDebounce } from '@hooks/useDebounce';
 
 import { Header } from '@components/Header';
@@ -10,8 +12,14 @@ import { Exam } from '@components/Exam';
 
 import styles from '@styles/pages/ExamsPage.module.scss';
 
+interface IExamTag {
+  id: string;
+  name: string;
+  color: string;
+}
+
 interface IExam {
-  examType: 'p1' | 'p2' | 'p3',
+  examTags: IExamTag[],
   examName: string,
   examDate: string,
 }
@@ -27,6 +35,18 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
 
   const debouncedValue = useDebounce(searchValue, 500);
 
+  function filter(arr: any[], condition: CallableFunction): any[] {
+    return arr.filter(
+      val => Object.values(val).find(
+        v => {
+          if (Array.isArray(v)) return filter(v, condition).length
+          
+          return condition(v)        
+        }
+      )
+    )
+  }
+
   useEffect(() => {
     if (!searchValue || searchValue.trim() === '') {
       setExamsToShow(allExams.current)
@@ -35,12 +55,10 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
     }
 
     if (debouncedValue) {
-      const filteredExams = allExams.current.filter(
-        exam => Object.values(exam).find(
-          value => value.toLowerCase().includes(searchValue.toLowerCase())
-        )
-      )
-      console.log(filteredExams);
+      const filteredExams = filter(
+        allExams.current,
+        (v: any) => v.toLowerCase().includes(searchValue.toLowerCase())
+      );
   
       setExamsToShow(filteredExams);
     }
@@ -52,6 +70,7 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
       <Header
         title="Provas"
         description="Listagem das provas e da data de realização"
+        backTo="/"
       />
 
       <SearchInput
@@ -63,7 +82,7 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
         { examsToShow.map((exam, i) => (
           <Exam
             key={`exam-${i}`}
-            examType={exam.examType}
+            examTags={exam.examTags}
             examName={exam.examName}
             examDate={exam.examDate}
           />
@@ -74,18 +93,7 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const exams: IExam[] = [
-    {
-      examType: 'p1',
-      examName: 'Algorítimos e Lógica de Programação',
-      examDate: '22/09'
-    },
-    {
-      examType: 'p1',
-      examName: 'Matemática Discreta',
-      examDate: '23/09'
-    },
-  ]
+  const exams = await getExams();
   
   return {
     props: {
