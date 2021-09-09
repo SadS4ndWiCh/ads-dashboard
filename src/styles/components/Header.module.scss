@@ -2,16 +2,43 @@
 
 .headerContainer {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
-  h1 {
-    font-size: 4rem;
+  > div {
+    margin-right: 1rem;
 
-    color: $clr-text-primary;
+    h1 {
+      font-size: 4rem;
+  
+      color: $clr-text-primary;
+    }
+  
+    p {
+      font-size: 1.6rem;
+      color: $clr-text-secundary;
+    }
   }
 
-  p {
-    font-size: 1.6rem;
-    color: $clr-text-secundary;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 5rem;
+    height: 5rem;
+
+    border-radius: 1.3rem;
+
+    line-height: 0;
+
+    background-color: rgba($gray, .21);
+
+    &:hover {
+      filter: brightness(.8);
+    }
   }
 }
