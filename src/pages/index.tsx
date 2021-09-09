@@ -41,12 +41,14 @@ const Home: NextPage = () => {
           href="/notices"
           label="Avisos"
           icon="🔔"
-        />
+          className="disabled"
+          />
         
         <IconLink
           href="/reminders"
           label="Lembretes"
           icon="❗"
+          className="disabled"
         />
 
       </main>
