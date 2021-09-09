@@ -1,13 +1,18 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+
+import ArrowLeftSVG from '@public/icons/arrow-left.svg';
 
 import styles from '@styles/components/Header.module.scss';
 
 type HeaderProps = {
   title: string,
   description?: string,
+  backTo?: string,
 };
 
-export function Header({ title, description }: HeaderProps) {
+export function Header({ title, description, backTo }: HeaderProps) {
   return (
     <header className={styles.headerContainer}>
       <Head>
@@ -17,8 +22,21 @@ export function Header({ title, description }: HeaderProps) {
         <title>{title}</title>
       </Head>
 
-      <h1>{ title }</h1>
-      { description && <p>{ description }</p> }
+      <div>
+        <h1>{ title }</h1>
+        { description && <p>{ description }</p> }
+      </div>
+
+      { backTo && (
+        <Link href={backTo}>
+          <a>
+            <Image
+              src={ArrowLeftSVG}
+              alt="Voltar para página anterior"
+            />
+          </a>
+        </Link>
+      ) }
     </header>
   )
 }
