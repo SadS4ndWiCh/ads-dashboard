@@ -1,3 +1,5 @@
+import { notion, databaseId } from '@services/notion';
+
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 
@@ -55,4 +57,57 @@ export function getHoraries(horaryType: 'all' | 'today') {
   if (todayWeekday === 0 || todayWeekday === 6) return [];
 
   return allHoraries[todayWeekday-1];
+}
+
+export async function getActivities() {
+  const data = await notion.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: 'Tags',
+      multi_select: {
+        contains: 'activity'
+      }
+    },
+  });
+
+  const activities = data.results.map(activity => {
+    const finishDate = dayjs(activity.properties['Finish Date'].date.start);
+
+    const activityObj = {
+      importanceLevel: activity.properties['Importance Level'].multi_select[0].name,
+      activityName: activity.properties.Name.title[0].plain_text,
+      activityDescription: activity.properties.Description.rich_text[0].plain_text,
+      finishDate: finishDate.format('DD/MM'),
+    };
+
+    return activityObj;
+  });
+
+  return activities;
+}
+
+export async function getExams() {
+  const data = await notion.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: 'Tags',
+      multi_select: {
+        contains: 'exam'
+      },
+    },
+  });
+
+  const exams = data.results.map(exam => {
+    const examDate = dayjs(exam.properties.Date.date.start);
+
+    const examObj = {
+      examName: exam.properties.Name.title[0].plain_text,
+      examDate: examDate.format('DD/MM'),
+      examTags: exam.properties.Tags.multi_select.filter(tag => tag.name !== 'exam'),
+    };
+
+    return examObj
+  });
+
+  return exams;
 }
