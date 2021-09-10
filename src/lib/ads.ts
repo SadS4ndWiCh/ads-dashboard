@@ -6,6 +6,8 @@ import timezone from 'dayjs/plugin/timezone';
 dayjs.extend(timezone);
 dayjs.tz.setDefault('America/Sao_Paulo');
 
+export const day = dayjs;
+
 const allHoraries = [
   {
     label: 'Segunda',
