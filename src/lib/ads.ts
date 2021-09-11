@@ -84,6 +84,8 @@ export async function getActivities() {
       activityName: activity.properties.Name.title[0].plain_text,
       // @ts-ignore
       activityDescription: activity.properties.Description.rich_text[0].plain_text,
+      // @ts-ignore
+      activityTags: activity.properties.Tags.multi_select.filter(tag => tag.name !== 'activity'),
       finishDate: finishDate.format('DD/MM'),
     };
 
