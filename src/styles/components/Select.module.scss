@@ -1,0 +1,23 @@
+@import '../variables';
+
+.selectContainer {
+  padding: 1.2rem 1rem;
+
+  border: .5px solid transparent;
+  border-radius: .5rem;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+
+  color: $clr-text-primary;
+
+  background-color: #fff;
+
+  cursor: pointer;
+
+  &:focus {
+    border-color: black;
+  }
+}
