@@ -79,7 +79,7 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
             { value: "lab-hardware", label: 'Laboratório de Hardware' },
             { value: "alg-log", label: 'Algoritmo e Lógica de Programação' },
             { value: "adm-ger", label: 'Administração Geral' },
-            { value: "arq-org", label: 'Arquitetura e Organização de Computadores' },
+            { value: "arq-org-comp", label: 'Arquitetura e Organização de Computadores' },
             { value: "prog-mic", label: 'Programação em Microinformática' },
             { value: "ing", label: 'Inglês' },
             { value: "mat-disc", label: 'Matemática Discreta' },
