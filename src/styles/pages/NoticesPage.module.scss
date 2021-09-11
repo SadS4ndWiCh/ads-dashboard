@@ -1,0 +1,10 @@
+@use '../formats';
+@import '../variables';
+
+.container {
+  @include formats.page;
+
+  main > div {
+    margin-bottom: 1.4rem;
+  }
+}
