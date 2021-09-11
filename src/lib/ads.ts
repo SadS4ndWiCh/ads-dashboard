@@ -1,3 +1,4 @@
+import { Exam } from '@components/Exam';
 import { notion, databaseId } from '@services/notion';
 
 import dayjs from 'dayjs';
@@ -114,9 +115,34 @@ export async function getExams() {
       // @ts-ignore
       examTags: exam.properties.Tags.multi_select.filter(tag => tag.name !== 'exam'),
     };
+    
+    return examObj;
+  });
+  
+  return exams;
+}
 
-    return examObj
+export async function getNotices() {
+  const data = await notion.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: 'Tags',
+      multi_select: {
+        contains: 'notice'
+      }
+    }
+  });
+  
+  const notices = data.results.map(notice => {
+    const noticeObj = {
+      // @ts-ignore
+      noticeTitle: notice.properties.Name.title[0].plain_text,
+      // @ts-ignore
+      noticeDescription: notice.properties.Description.rich_text[0].plain_text,
+    }
+
+    return noticeObj;
   });
 
-  return exams;
+  return notices;
 }
