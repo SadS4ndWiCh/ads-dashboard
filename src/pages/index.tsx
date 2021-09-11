@@ -41,7 +41,6 @@ const Home: NextPage = () => {
           href="/notices"
           label="Avisos"
           icon="🔔"
-          className="disabled"
           />
         
         <IconLink
