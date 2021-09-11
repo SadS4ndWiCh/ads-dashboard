@@ -4,11 +4,9 @@ import type { GetStaticProps, NextPage } from 'next';
 
 import { getExams } from '@lib/ads';
 
-import { useDebounce } from '@hooks/useDebounce';
-
 import { Header } from '@components/Header';
-import { SearchInput } from '@components/SearchInput';
 import { Exam } from '@components/Exam';
+import { Select } from '@components/Select';
 
 import styles from '@styles/pages/ExamsPage.module.scss';
 
@@ -31,39 +29,32 @@ type ExamsPageProps = {
 const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
   const allExams = useRef<IExam[]>(exams);
   const [examsToShow, setExamsToShow] = useState<IExam[]>(exams);
-  const [searchValue, setSearchValue]= useState('');
+  const [tags, setTags] = useState({
+    examTag: '',
+    classTag: '',
+  });
 
-  const debouncedValue = useDebounce(searchValue, 500);
+  const tagRegex = /p[1,2,3]/i;
 
-  function filter(arr: any[], condition: CallableFunction): any[] {
-    return arr.filter(
-      val => Object.values(val).find(
-        v => {
-          if (Array.isArray(v)) return filter(v, condition).length
-          
-          return condition(v)        
-        }
-      )
+  function filterByTags(tagsName: string[]) {
+    return allExams.current.filter(
+      exam => {
+        const examTags = exam.examTags.map(tag => tag.name);
+        return tagsName.every(tagName => examTags.includes(tagName));
+      }
     )
   }
 
   useEffect(() => {
-    if (!searchValue || searchValue.trim() === '') {
-      setExamsToShow(allExams.current)
-
-      return;
+    if (tags.examTag === '' && tags.classTag === '') {
+      setExamsToShow(allExams.current);
     }
-
-    if (debouncedValue) {
-      const filteredExams = filter(
-        allExams.current,
-        (v: any) => v.toLowerCase().includes(searchValue.toLowerCase())
-      );
-  
-      setExamsToShow(filteredExams);
+    else {
+      const filtered = filterByTags(Object.values(tags).filter(tag => tag !== ''));
+      setExamsToShow(filtered);
     }
-
-  }, [debouncedValue]);
+    
+  }, [tags]);
 
   return (
     <div className={styles.container}>
@@ -73,20 +64,44 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
         backTo="/"
       />
 
-      <SearchInput
-        placeholder="Pesquisar provas"
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
+      <div className={styles.filters}>
+        <Select
+          options={[
+            { value: 'p1', label: 'P1' },
+            { value: 'p2', label: 'P2' },
+            { value: 'p3', label: 'P3' },
+          ]}
+          placeholder="Selecionar prova"
+          onChange={(e) => setTags(old => ({ ...old, examTag: e.target.value }))}
+        />
+        <Select
+          options={[
+            { value: "lab-hardware", label: 'Laboratório de Hardware' },
+            { value: "alg-log", label: 'Algoritmo e Lógica de Programação' },
+            { value: "adm-ger", label: 'Administração Geral' },
+            { value: "arq-org", label: 'Arquitetura e Organização de Computadores' },
+            { value: "prog-mic", label: 'Programação em Microinformática' },
+            { value: "ing", label: 'Inglês' },
+            { value: "mat-disc", label: 'Matemática Discreta' },
+          ]}
+          placeholder="Selecionar matéria"
+          onChange={(e) => setTags(old => ({ ...old, classTag: e.target.value }))}
+        />
+      </div>
 
       <main>
-        { examsToShow.map((exam, i) => (
-          <Exam
-            key={`exam-${i}`}
-            examTags={exam.examTags}
-            examName={exam.examName}
-            examDate={exam.examDate}
-          />
-        )) }
+        { 
+          examsToShow.length ?
+            examsToShow.map((exam, i) => (
+              <Exam
+                key={`exam-${i}`}
+                examTags={exam.examTags.filter(tag => tag.name.match(tagRegex))}
+                examName={exam.examName}
+                examDate={exam.examDate}
+              />
+            )) :
+            <p>Sem provas</p>
+        }
       </main>
     </div>
   )
