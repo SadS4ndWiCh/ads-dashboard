@@ -1,0 +1,23 @@
+@import '../variables';
+
+.noticeContainer {
+  display: flex;
+  flex-direction: column;
+
+  padding: .95rem 1.3rem;
+
+  border-radius: .5rem;
+
+  background-color: #FFEEC1;
+  
+  h3 {
+    font-size: 1.5rem;
+    color: $clr-text-primary;
+  }
+  
+  p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: $clr-text-secundary;
+  }
+}
