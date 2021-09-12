@@ -20,6 +20,7 @@ interface IExam {
   examTags: IExamTag[],
   examName: string,
   examDate: string,
+  isDone: boolean,
 }
 
 type ExamsPageProps = {
@@ -98,6 +99,7 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
                 examTags={exam.examTags.filter(tag => tag.name.match(tagRegex))}
                 examName={exam.examName}
                 examDate={exam.examDate}
+                isDone={exam.isDone}
               />
             )) :
             <p>Sem provas</p>

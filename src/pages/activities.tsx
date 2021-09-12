@@ -22,6 +22,7 @@ interface IActivities {
   activityDescription: string;
   activityTags: IAtivityTags[];
   finishDate: string;
+  isFinished: boolean;
 }
 
 type ActivitiesPageProps = {
@@ -89,6 +90,7 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
                 activityName={activity.activityName}
                 activityDescription={activity.activityDescription}
                 finishDate={activity.finishDate}
+                isFinished={activity.isFinished}
               />
               )) :
             <p>Sem atividades</p>
