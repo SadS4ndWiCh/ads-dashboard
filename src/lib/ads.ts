@@ -148,3 +148,28 @@ export async function getNotices() {
 
   return notices;
 }
+
+export async function getReminders() {
+  const data = await notion.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: 'Tags',
+      multi_select: {
+        contains: 'reminder'
+      }
+    }
+  });
+
+  const reminders = data.results.map(reminder => {
+    const reminderObj = {
+      // @ts-ignore
+      reminderTitle: reminder.properties.Name.title[0].plain_text,
+      // @ts-ignore
+      reminderDescription: reminder.properties.Description.rich_text[0].plain_text,
+    };
+
+    return reminderObj;
+  });
+
+  return reminders;
+}
