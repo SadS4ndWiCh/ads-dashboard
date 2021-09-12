@@ -32,7 +32,7 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ horaries }) => {
     if (weekday === 0 || weekday === 6) {
       setTodayClasses({
         id: 0,
-        label: weekday === 0 ? 'Domingo' : 'Sabado',
+        label: weekday === 0 ? 'Domingo' : 'Sábado',
         classesSchedules: [],
       })
       return
@@ -52,6 +52,9 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ horaries }) => {
 
       <main>
         <h3>{ todayClasses && todayClasses.label }</h3>
+        { todayClasses && !todayClasses.classesSchedules.length && (
+          <p>Não tem aula</p>
+        ) }
         { todayClasses && todayClasses.classesSchedules.map((classSchedule, i) => (
           <ClassSchedule
             key={`class-${i}`}
