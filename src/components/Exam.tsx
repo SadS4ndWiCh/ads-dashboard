@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 import styles from '@styles/components/Exam.module.scss';
 
 interface IExamTag {
@@ -10,14 +12,28 @@ type ExamProps = {
   examTags: IExamTag[],
   examName: string,
   examDate: string,
+  isDone: boolean,
 };
 
-export function Exam({ examTags, examName, examDate }: ExamProps) {
+export function Exam({ examTags, examName, examDate, isDone }: ExamProps) {
+  const customStyle = {
+    'filter': `brightness(${ isDone ? .8 : 1 })`
+  } as CSSProperties;
+  
   return (
-    <div className={styles.examContainer}>
+    <div
+      className={styles.examContainer}
+      style={customStyle}
+    >
       <div>
         <p>{examName}</p>
-        <small>Data da Prova: <strong>{examDate}</strong></small>
+        <small>
+          {
+            isDone ? 
+              'Prazo encerrado' : 
+              ( <>Data da Prova: <strong>{examDate}</strong></> )
+          }
+        </small>
       </div>
 
       <div className={styles.examTags}>

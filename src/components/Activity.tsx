@@ -5,10 +5,17 @@ type ActivityProps = {
   activityName: string,
   activityDescription: string,
   finishDate: string,
+  isFinished: boolean,
 };
 
 export function Activity(
-  { importanceLevel, activityName, activityDescription, finishDate }: ActivityProps
+  {
+    importanceLevel,
+    activityName,
+    activityDescription,
+    finishDate,
+    isFinished
+  }: ActivityProps
 ) {
   const colorByImportance = {
     'normal': '#A5FF6F',
@@ -18,7 +25,8 @@ export function Activity(
   }
 
   const customStyle = {
-    '--importanceColor': colorByImportance[importanceLevel]
+    '--importanceColor': colorByImportance[importanceLevel],
+    'filter': `brightness(${ isFinished ? .8 : 1 })`
   } as React.CSSProperties
 
   return (
@@ -29,7 +37,7 @@ export function Activity(
       <strong>{ activityName }</strong>
       <p>{ activityDescription }</p>
 
-      <small>Entregar até { finishDate }</small>
+      <small>{ isFinished ? 'Prazo encerrado' : `Entregar até ${finishDate}` }</small>
     </div>
   )
 }
