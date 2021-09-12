@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       reminders,
     },
-
+    revalidate: 60 * 60 * 12 // a cada 12h
   }
 };
 
