@@ -1,0 +1,17 @@
+@use '../formats';
+
+.container {
+  @include formats.page;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 1.4rem;
+
+    a {
+      margin-top: 2rem;
+    }
+  }
+}
