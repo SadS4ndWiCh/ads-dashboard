@@ -1,4 +1,3 @@
-import { Exam } from '@components/Exam';
 import { notion, databaseId } from '@services/notion';
 
 import dayjs from 'dayjs';
@@ -73,10 +72,15 @@ export async function getActivities() {
     },
   });
 
-  const activities = data.results.map(activity => {
+  const activities = data.results.flatMap(activity => {
     // @ts-ignore
     const finishDate = dayjs(activity.properties['Finish Date'].date.start);
-    
+    const now = dayjs();
+  
+    const isFinished = finishDate < now;
+  
+    if (finishDate < now.subtract(1, 'week')) return [];
+
     const activityObj = {
       // @ts-ignore
       importanceLevel: activity.properties['Importance Level'].multi_select[0].name,
@@ -87,9 +91,12 @@ export async function getActivities() {
       // @ts-ignore
       activityTags: activity.properties.Tags.multi_select.filter(tag => tag.name !== 'activity'),
       finishDate: finishDate.format('DD/MM'),
+      isFinished,
     };
 
-    return activityObj;
+    return [activityObj];
+  }).sort((a, b) => {
+    return (a.isFinished === b.isFinished) ? 0 : a.isFinished ? 1 : -1;
   });
 
   return activities;
@@ -106,9 +113,14 @@ export async function getExams() {
     },
   });
 
-  const exams = data.results.map(exam => {
+  const exams = data.results.flatMap(exam => {
     // @ts-ignore
     const examDate = dayjs(exam.properties.Date.date.start);
+    const now = dayjs();
+
+    const isDone = examDate < now;
+
+    if (examDate < now.subtract(1, 'week')) return [];
 
     const examObj = {
       // @ts-ignore
@@ -116,11 +128,14 @@ export async function getExams() {
       examDate: examDate.format('DD/MM'),
       // @ts-ignore
       examTags: exam.properties.Tags.multi_select.filter(tag => tag.name !== 'exam'),
+      isDone,
     };
     
-    return examObj;
+    return [examObj];
+  }).sort((a, b) => {
+    return (a.isDone === b.isDone) ? 0 : a.isDone ? 1 : -1;
   });
-  
+
   return exams;
 }
 
