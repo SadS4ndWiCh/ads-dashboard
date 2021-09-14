@@ -150,7 +150,11 @@ export async function getNotices() {
     }
   });
   
-  const notices = data.results.map(notice => {
+  const notices = data.results.flatMap(notice => {
+      // @ts-ignore
+    const noticeEndDate = dayjs(notice.properties.Date.date.end);
+    if (noticeEndDate < dayjs()) return []
+
     const noticeObj = {
       // @ts-ignore
       noticeTitle: notice.properties.Name.title[0].plain_text,
@@ -158,7 +162,7 @@ export async function getNotices() {
       noticeDescription: notice.properties.Description.rich_text[0].plain_text,
     }
 
-    return noticeObj;
+    return [noticeObj];
   });
 
   return notices;
@@ -175,7 +179,11 @@ export async function getReminders() {
     }
   });
 
-  const reminders = data.results.map(reminder => {
+  const reminders = data.results.flatMap(reminder => {
+    // @ts-ignore
+    const reminderEndDate = dayjs(reminder.properties.Date.date.end);
+    if (reminderEndDate < dayjs()) return []
+    
     const reminderObj = {
       // @ts-ignore
       reminderTitle: reminder.properties.Name.title[0].plain_text,
@@ -183,7 +191,7 @@ export async function getReminders() {
       reminderDescription: reminder.properties.Description.rich_text[0].plain_text,
     };
 
-    return reminderObj;
+    return [reminderObj];
   });
 
   return reminders;
