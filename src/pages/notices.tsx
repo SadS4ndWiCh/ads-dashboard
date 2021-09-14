@@ -27,7 +27,7 @@ const NoticesPage: NextPage<NoticesPageProps> = ({ notices }) => {
       />
 
       <main>
-        { notices && notices.map((notice, i) => (
+        { notices.length ? notices.map((notice, i) => (
           <div
             key={`notice-${i}`}
           >
@@ -36,7 +36,9 @@ const NoticesPage: NextPage<NoticesPageProps> = ({ notices }) => {
               noticeDescription={notice.noticeDescription}
             />
           </div>
-        )) }
+        )) : 
+          <p>Sem avisos</p>
+        }
       </main>
     </div>
   )
