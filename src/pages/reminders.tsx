@@ -26,16 +26,15 @@ const RemindersPage: NextPage<RemindersPageProps> = ({ reminders }) => {
       />
 
       <main>
-        { reminders && !reminders.length && (
-          <p>Sem lembretes</p>
-        ) }
-        { reminders && reminders.map((reminder, i) => (
+        { reminders.length ? reminders.map((reminder, i) => (
           <Reminder
             key={`reminder-${i}`}
             reminderTitle={reminder.reminderTitle}
             reminderDescription={reminder.reminderDescription}
           />
-        )) }
+        )) :
+          <p>Sem lembretes</p>
+        }
       </main>
     </div>
   )
