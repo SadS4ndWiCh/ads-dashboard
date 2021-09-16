@@ -74,7 +74,7 @@ export async function getActivities() {
 
   const activities = data.results.flatMap(activity => {
     // @ts-ignore
-    const finishDate = dayjs(activity.properties['Finish Date'].date.start);
+    const finishDate = dayjs(activity.properties.Date.date.end);
     const now = dayjs();
   
     const isFinished = finishDate < now;
