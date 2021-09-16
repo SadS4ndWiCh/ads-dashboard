@@ -8,6 +8,13 @@
   }
 
   main > hr {
+    height: .1rem;
+
     margin: 1.4rem 0;
+
+    border: 0;
+
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
   }
 }
