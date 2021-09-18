@@ -11,6 +11,8 @@
 }
 
 body {
+  text-rendering: optimizeLegibility;
+
   background-color: $clr-bg;
 }
 
