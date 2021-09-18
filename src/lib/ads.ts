@@ -2,8 +2,13 @@ import { notion, databaseId } from '@services/notion';
 
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import 'dayjs/locale/pt-br'
 
 dayjs.extend(timezone);
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
 dayjs.tz.setDefault('America/Sao_Paulo');
 
 export const day = dayjs;
@@ -74,8 +79,8 @@ export async function getActivities() {
 
   const activities = data.results.flatMap(activity => {
     // @ts-ignore
-    const finishDate = dayjs(activity.properties.Date.date.end);
-    const now = dayjs();
+    const finishDate = dayjs(activity.properties.Date.date.end).tz('America/Sao_Paulo');
+    const now = dayjs().tz('America/Sao_Paulo');
   
     const isFinished = finishDate < now;
   
@@ -90,7 +95,7 @@ export async function getActivities() {
       activityDescription: activity.properties.Description.rich_text[0].plain_text,
       // @ts-ignore
       activityTags: activity.properties.Tags.multi_select.filter(tag => tag.name !== 'activity'),
-      finishDate: finishDate.format('DD/MM'),
+      finishDate: finishDate.format('DD/MM HH:mm'),
       isFinished,
     };
 
