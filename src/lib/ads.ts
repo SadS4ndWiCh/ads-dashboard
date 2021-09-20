@@ -59,7 +59,7 @@ const allHoraries = [
 export function getHoraries(horaryType: 'all' | 'today') {
   if (horaryType === 'all') return allHoraries;
 
-  const todayWeekday = dayjs().day();
+  const todayWeekday = dayjs().tz('America/Sao_Paulo').day();
 
   if (todayWeekday === 0 || todayWeekday === 6) return [];
 
@@ -120,8 +120,8 @@ export async function getExams() {
 
   const exams = data.results.flatMap(exam => {
     // @ts-ignore
-    const examDate = dayjs(exam.properties.Date.date.start);
-    const now = dayjs();
+    const examDate = dayjs(exam.properties.Date.date.start).tz('America/Sao_Paulo');
+    const now = dayjs().tz('America/Sao_Paulo');
 
     const isDone = examDate < now;
 
@@ -157,8 +157,8 @@ export async function getNotices() {
   
   const notices = data.results.flatMap(notice => {
       // @ts-ignore
-    const noticeEndDate = dayjs(notice.properties.Date.date.end);
-    if (noticeEndDate < dayjs()) return []
+    const noticeEndDate = dayjs(notice.properties.Date.date.end).tz('America/Sao_Paulo');
+    if (noticeEndDate < dayjs().tz('America/Sao_Paulo')) return []
 
     const noticeObj = {
       // @ts-ignore
@@ -186,8 +186,8 @@ export async function getReminders() {
 
   const reminders = data.results.flatMap(reminder => {
     // @ts-ignore
-    const reminderEndDate = dayjs(reminder.properties.Date.date.end);
-    if (reminderEndDate < dayjs()) return []
+    const reminderEndDate = dayjs(reminder.properties.Date.date.end).tz('America/Sao_Paulo');
+    if (reminderEndDate < dayjs().tz('America/Sao_Paulo')) return []
     
     const reminderObj = {
       // @ts-ignore
