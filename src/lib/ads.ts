@@ -90,11 +90,11 @@ export async function getActivities() {
       // @ts-ignore
       importanceLevel: activity.properties['Importance Level'].multi_select[0].name,
       // @ts-ignore
-      activityName: activity.properties.Name.title[0].plain_text,
+      name: activity.properties.Name.title[0].plain_text,
       // @ts-ignore
-      activityDescription: activity.properties.Description.rich_text[0].plain_text,
+      description: activity.properties.Description.rich_text[0].plain_text,
       // @ts-ignore
-      activityTags: activity.properties.Tags.multi_select.filter(tag => tag.name !== 'activity'),
+      tags: activity.properties.Tags.multi_select.filter(tag => tag.name !== 'activity'),
       finishDate: finishDate.format('DD/MM HH:mm'),
       isFinished,
     };
@@ -129,10 +129,10 @@ export async function getExams() {
 
     const examObj = {
       // @ts-ignore
-      examName: exam.properties.Name.title[0].plain_text,
-      examDate: examDate.format('DD/MM'),
+      name: exam.properties.Name.title[0].plain_text,
+      date: examDate.format('DD/MM'),
       // @ts-ignore
-      examTags: exam.properties.Tags.multi_select.filter(tag => tag.name !== 'exam'),
+      tags: exam.properties.Tags.multi_select.filter(tag => tag.name !== 'exam'),
       isDone,
     };
     
@@ -162,9 +162,9 @@ export async function getNotices() {
 
     const noticeObj = {
       // @ts-ignore
-      noticeTitle: notice.properties.Name.title[0].plain_text,
+      title: notice.properties.Name.title[0].plain_text,
       // @ts-ignore
-      noticeDescription: notice.properties.Description.rich_text[0].plain_text,
+      description: notice.properties.Description.rich_text[0].plain_text,
     }
 
     return [noticeObj];
@@ -191,9 +191,9 @@ export async function getReminders() {
     
     const reminderObj = {
       // @ts-ignore
-      reminderTitle: reminder.properties.Name.title[0].plain_text,
+      title: reminder.properties.Name.title[0].plain_text,
       // @ts-ignore
-      reminderDescription: reminder.properties.Description.rich_text[0].plain_text,
+      description: reminder.properties.Description.rich_text[0].plain_text,
     };
 
     return [reminderObj];

@@ -9,8 +9,8 @@ import { Notice } from '@components/Notice';
 import styles from '@styles/pages/NoticesPage.module.scss';
 
 interface INotice {
-  noticeTitle: string;
-  noticeDescription: string;
+  title: string;
+  description: string;
 }
 
 type NoticesPageProps = {
@@ -32,8 +32,8 @@ const NoticesPage: NextPage<NoticesPageProps> = ({ notices }) => {
             key={`notice-${i}`}
           >
             <Notice
-              noticeTitle={notice.noticeTitle}
-              noticeDescription={notice.noticeDescription}
+              noticeTitle={notice.title}
+              noticeDescription={notice.description}
             />
           </div>
         )) : 

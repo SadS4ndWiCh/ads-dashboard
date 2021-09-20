@@ -17,9 +17,9 @@ interface IExamTag {
 }
 
 interface IExam {
-  examTags: IExamTag[],
-  examName: string,
-  examDate: string,
+  tags: IExamTag[],
+  name: string,
+  date: string,
   isDone: boolean,
 }
 
@@ -40,7 +40,7 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
   function filterByTags(tagsName: string[]) {
     return allExams.current.filter(
       exam => {
-        const examTags = exam.examTags.map(tag => tag.name);
+        const examTags = exam.tags.map(tag => tag.name);
         return tagsName.every(tagName => examTags.includes(tagName));
       }
     )
@@ -96,9 +96,9 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
             examsToShow.map((exam, i) => (
               <Exam
                 key={`exam-${i}`}
-                examTags={exam.examTags.filter(tag => tag.name.match(tagRegex))}
-                examName={exam.examName}
-                examDate={exam.examDate}
+                examTags={exam.tags.filter(tag => tag.name.match(tagRegex))}
+                examName={exam.name}
+                examDate={exam.date}
                 isDone={exam.isDone}
               />
             )) :

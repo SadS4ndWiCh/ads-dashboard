@@ -18,9 +18,9 @@ interface IAtivityTags {
 
 interface IActivities {
   importanceLevel: 'normal' | 'regular' | 'important' | 'urgent';
-  activityName: string;
-  activityDescription: string;
-  activityTags: IAtivityTags[];
+  name: string;
+  description: string;
+  tags: IAtivityTags[];
   finishDate: string;
   isFinished: boolean;
 }
@@ -38,7 +38,7 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
   function filterByTag(tagName: string) {
     return allActivities.current.filter(
       activity => {
-        const activityTags = activity.activityTags.map(tag => tag.name);
+        const activityTags = activity.tags.map(tag => tag.name);
         return activityTags.includes(tagName);
       }
     )
@@ -87,8 +87,8 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
               <Activity
                 key={`activity-${i}`}
                 importanceLevel={activity.importanceLevel}
-                activityName={activity.activityName}
-                activityDescription={activity.activityDescription}
+                activityName={activity.name}
+                activityDescription={activity.description}
                 finishDate={activity.finishDate}
                 isFinished={activity.isFinished}
               />

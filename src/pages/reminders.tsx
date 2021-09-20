@@ -8,8 +8,8 @@ import { Reminder } from '@components/Reminder';
 import styles from '@styles/pages/RemindersPage.module.scss';
 
 interface IReminder {
-  reminderTitle: string;
-  reminderDescription: string;
+  title: string;
+  description: string;
 }
 
 type RemindersPageProps = {
@@ -29,8 +29,8 @@ const RemindersPage: NextPage<RemindersPageProps> = ({ reminders }) => {
         { reminders.length ? reminders.map((reminder, i) => (
           <Reminder
             key={`reminder-${i}`}
-            reminderTitle={reminder.reminderTitle}
-            reminderDescription={reminder.reminderDescription}
+            reminderTitle={reminder.title}
+            reminderDescription={reminder.description}
           />
         )) :
           <p>Sem lembretes</p>
