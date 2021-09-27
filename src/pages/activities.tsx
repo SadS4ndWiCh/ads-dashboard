@@ -17,7 +17,6 @@ interface IAtivityTags {
 }
 
 interface IActivities {
-  importanceLevel: 'normal' | 'regular' | 'important' | 'urgent';
   name: string;
   description: string;
   tags: IAtivityTags[];
@@ -86,7 +85,6 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
             activitiesToShow.map((activity, i) => (
               <Activity
                 key={`activity-${i}`}
-                importanceLevel={activity.importanceLevel}
                 activityName={activity.name}
                 activityDescription={activity.description}
                 finishDate={activity.finishDate}
