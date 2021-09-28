@@ -125,7 +125,7 @@ export async function getExams() {
 
     const isDone = examDate < now;
 
-    if (examDate < now.subtract(1, 'week')) return [];
+    if (examDate < now.subtract(2, 'months')) return [];
 
     const examObj = {
       // @ts-ignore
