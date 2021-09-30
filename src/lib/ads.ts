@@ -88,8 +88,6 @@ export async function getActivities() {
 
     const activityObj = {
       // @ts-ignore
-      importanceLevel: activity.properties['Importance Level'].multi_select[0].name,
-      // @ts-ignore
       name: activity.properties.Name.title[0].plain_text,
       // @ts-ignore
       description: activity.properties.Description.rich_text[0].plain_text,
