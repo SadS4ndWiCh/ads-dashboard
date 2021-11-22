@@ -57,9 +57,20 @@ const allHoraries = [
 ];
 
 export function getHoraries(horaryType: 'all' | 'today') {
-  if (horaryType === 'all') return allHoraries;
-
   const todayWeekday = dayjs().tz('America/Sao_Paulo').day();
+  
+  if (horaryType === 'all' && todayWeekday !== 0 && todayWeekday !== 6) return allHoraries
+    .map((currentHorary, index) => {
+      if ((index + 1) === todayWeekday) return {
+        ...currentHorary,
+        isToday: true,
+      }
+
+      return {
+        ...currentHorary,
+        isToday: false,
+      }
+    });
 
   if (todayWeekday === 0 || todayWeekday === 6) return [];
 
