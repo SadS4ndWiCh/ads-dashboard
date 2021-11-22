@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import type { GetStaticProps, NextPage } from 'next';
 
 import { getHoraries, day } from '@lib/ads';
@@ -6,7 +7,7 @@ import { Header } from '@components/Header';
 import { ClassSchedule } from '@components/ClassSchedule';
 
 import styles from '@styles/pages/ClassesPage.module.scss';
-import { useEffect, useRef, useState } from 'react';
+import { Link } from '@components/Link';
 
 interface IClassSchedule {
   startTime: string;
@@ -62,6 +63,11 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ horaries }) => {
             classSubjectName={classSchedule.classSubjectName}
           />
         )) }
+
+        <Link
+          href='/horaries'
+          className={styles.seeAllHoraries}
+        >Ver todos horários</Link>
       </main>
     </div>
   )
