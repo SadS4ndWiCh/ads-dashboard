@@ -13,10 +13,20 @@
   }
 
   h3 {
+    display: flex;
+    align-items: center;
     margin-bottom: 1.3rem;
 
     font-size: 2.4rem;
 
     color: $clr-text-primary;
+
+    span.isToday {
+      margin-left: .5rem;
+
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: $clr-text-secundary;
+    }
   }
 }
