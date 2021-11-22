@@ -25,3 +25,24 @@
     }
   }
 }
+
+.seeAllHoraries {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+
+  padding: 2.5rem 5rem;
+
+  border-radius: 1.2rem;
+
+  font-size: 1.4rem;
+
+  color: $clr-text-secundary;
+  background-color: rgba($color: $gray, $alpha: .21);
+
+  transition: filter .1s;
+
+  &:hover {
+    filter: brightness(.7);
+  }
+}
