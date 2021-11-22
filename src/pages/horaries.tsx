@@ -15,6 +15,7 @@ interface IClassSchedule {
 interface IHorary {
   id: number;
   label: string;
+  isToday: boolean;
   classesSchedules: IClassSchedule[];
 }
 
@@ -33,7 +34,9 @@ const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
 
       { horaries.map((horary, i) => (
         <div key={`horary-${i}`}>
-          <h3>{ horary.label }</h3>
+          <h3>{ horary.label } { horary.isToday && (
+            <span className={styles.isToday}>• Hoje</span>
+          ) }</h3>
           { horary.classesSchedules.map((classSchedule, i) => (
             <ClassSchedule
               key={`class-${i}`}
