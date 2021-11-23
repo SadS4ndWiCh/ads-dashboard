@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 
-import { getHoraries } from '@lib/ads';
+import { day, getHoraries } from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { ClassSchedule } from '@components/ClassSchedule';
@@ -24,6 +24,8 @@ type HorariesPageProps = {
 };
 
 const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
+  const currentWeekday = day().tz('America/Sao_Paulo').day();
+
   return (
     <div className={styles.container}>
       <Header
@@ -34,7 +36,7 @@ const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
 
       { horaries.map((horary, i) => (
         <div key={`horary-${i}`}>
-          <h3>{ horary.label } { horary.isToday && (
+          <h3>{ horary.label } { horary.weekday === currentWeekday && (
             <span className={styles.isToday}>• Hoje</span>
           ) }</h3>
           { horary.classesSchedules.map((classSchedule, i) => (
