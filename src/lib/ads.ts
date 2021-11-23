@@ -15,6 +15,7 @@ export const day = dayjs;
 
 const allHoraries = [
   {
+    weekday: 1,
     label: 'Segunda',
     classesSchedules: [
       { startTime: '7:40', classSubjectName: 'Sem aula' },
@@ -23,6 +24,7 @@ const allHoraries = [
     ]
   },
   {
+    weekday: 2,
     label: 'Terça',
     classesSchedules: [
       { startTime: '7:40', classSubjectName: 'Programação em Microinformática' },
@@ -31,6 +33,7 @@ const allHoraries = [
     ],
   },
   {
+    weekday: 3,
     label: 'Quarta',
     classesSchedules: [
       { startTime: '7:40', classSubjectName: 'Programação em Microinformática' },
@@ -39,6 +42,7 @@ const allHoraries = [
     ],
   },
   {
+    weekday: 4,
     label: 'Quinta',
     classesSchedules: [
       { startTime: '7:40', classSubjectName: 'Administração Geral' },
@@ -47,6 +51,7 @@ const allHoraries = [
     ],
   },
   {
+    weekday: 5,
     label: 'Sexta',
     classesSchedules: [
       { startTime: '7:40', classSubjectName: 'Administração Geral' },
@@ -59,18 +64,7 @@ const allHoraries = [
 export function getHoraries(horaryType: 'all' | 'today') {
   const todayWeekday = dayjs().tz('America/Sao_Paulo').day();
   
-  if (horaryType === 'all' && todayWeekday !== 0 && todayWeekday !== 6) return allHoraries
-    .map((currentHorary, index) => {
-      if ((index + 1) === todayWeekday) return {
-        ...currentHorary,
-        isToday: true,
-      }
-
-      return {
-        ...currentHorary,
-        isToday: false,
-      }
-    });
+  if (horaryType === 'all') return allHoraries
 
   if (todayWeekday === 0 || todayWeekday === 6) return [];
 
