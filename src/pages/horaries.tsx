@@ -15,7 +15,7 @@ interface IClassSchedule {
 interface IHorary {
   id: number;
   label: string;
-  isToday: boolean;
+  weekday: number;
   classesSchedules: IClassSchedule[];
 }
 
