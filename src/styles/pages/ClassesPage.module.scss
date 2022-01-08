@@ -1,28 +1,23 @@
-@use '../formats';
 @import '../variables';
 
 .container {
-  @include formats.page;
+  h3 {
+    margin-bottom: 1.3rem;
 
-  main {
-    h3 {
-      margin-bottom: 1.3rem;
+    font-size: 2.4rem;
+  
+    color: $clr-text-primary;
+  }
 
-      font-size: 2.4rem;
-    
-      color: $clr-text-primary;
-    }
+  > p {
+    margin-top: 1.4rem;
 
-    > p {
-      margin-top: 1.4rem;
+    font-size: 1.5rem;
+    text-align: center;
+  }
 
-      font-size: 1.5rem;
-      text-align: center;
-    }
-
-    > div {
-      margin-bottom: 1.4rem;
-    }
+  > div {
+    margin-bottom: 1.4rem;
   }
 }
 
