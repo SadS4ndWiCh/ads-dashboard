@@ -1,13 +1,9 @@
-@use '../formats';
-
-.homeContainer {
-  @include formats.page;
-
-  main > a {
+.container {
+  > a {
     margin-bottom: 1.4rem;
   }
 
-  main > hr {
+  > hr {
     height: .1rem;
 
     margin: 1.4rem 0;
