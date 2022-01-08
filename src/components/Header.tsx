@@ -10,11 +10,11 @@ import styles from '@styles/components/Header.module.scss';
 type HeaderProps = {
   title: string,
   description?: string,
-  backTo?: string,
 };
 
-export function Header({ title, description, backTo }: HeaderProps) {
+export function Header({ title, description }: HeaderProps) {
   const router = useRouter();
+  const currentPath = router.pathname;
   
   return (
     <header className={styles.headerContainer}>
@@ -44,12 +44,12 @@ export function Header({ title, description, backTo }: HeaderProps) {
         { description && <p>{ description }</p> }
       </div>
 
-      { backTo && (
-        <Link href={backTo}>
+      { currentPath !== '/' && (
+        <Link href='/'>
           <a>
             <Image
               src={ArrowLeftSVG}
-              alt="Voltar para página anterior"
+              alt="Voltar para o início"
             />
           </a>
         </Link>
