@@ -65,7 +65,7 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ horaries }) => {
         )) }
 
         <Link
-          href='/horaries'
+          href='/horarios'
           className={styles.seeAllHoraries}
         >Ver todos horários</Link>
       </main>
