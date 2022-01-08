@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 
 import * as AdsApi from '@lib/ads';
 
-import { Header } from '@components/Header';
+import { Layout } from '@components/Layout';
 import { Notice } from '@components/Notice';
 
 import styles from '@styles/pages/NoticesPage.module.scss';
@@ -19,28 +19,24 @@ type NoticesPageProps = {
 
 const NoticesPage: NextPage<NoticesPageProps> = ({ notices }) => {
   return (
-    <div className={styles.container}>
-      <Header
-        title="Avisos"
-        description="Listagem de avisos importantes"
-        backTo="/"
-      />
-
-      <main>
-        { notices.length ? notices.map((notice, i) => (
-          <div
-            key={`notice-${i}`}
-          >
-            <Notice
-              noticeTitle={notice.title}
-              noticeDescription={notice.description}
-            />
-          </div>
-        )) : 
-          <p>Sem avisos</p>
-        }
-      </main>
-    </div>
+    <Layout
+      title='avisos'
+      description='Listagem de avisos importantes'
+      className={styles.container}
+    >
+      { notices.length ? notices.map((notice, i) => (
+        <div
+          key={`notice-${i}`}
+        >
+          <Notice
+            noticeTitle={notice.title}
+            noticeDescription={notice.description}
+          />
+        </div>
+      )) : 
+        <p>Sem avisos</p>
+      }
+    </Layout>
   )
 };
 
