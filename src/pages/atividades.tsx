@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-
 import type { GetStaticProps, NextPage } from 'next';
 
 import * as AdsApi from '@lib/ads';
 
-import { Header } from '@components/Header';
+import { Layout } from '@components/Layout';
 import { Activity } from '@components/Activity';
 import { Select } from '@components/Select';
 
@@ -54,13 +53,11 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
   }, [tag]);
 
   return (
-    <div className={styles.container}>
-      <Header
-        title="Atividades"
-        description="Listagem das atividades atuais para serem feitas"
-        backTo="/"
-      />
-
+    <Layout
+      title='Atividades'
+      description='Listagem das atividades atuais para serem feitas'
+      className={styles.container}
+    >
       <div
         className={styles.filters}
       >
@@ -79,23 +76,25 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
         />
       </div>
 
-      <main>
+      <ul className={styles.activitiesList}>
         { 
           activitiesToShow?.length ?
             activitiesToShow.map((activity, i) => (
-              <Activity
+              <li
                 key={`activity-${i}`}
-                activityName={activity.name}
-                activityDescription={activity.description}
-                finishDate={activity.finishDate}
-                isFinished={activity.isFinished}
-              />
+              >
+                <Activity
+                  activityName={activity.name}
+                  activityDescription={activity.description}
+                  finishDate={activity.finishDate}
+                  isFinished={activity.isFinished}
+                />
+              </li>
               )) :
             <p>Sem atividades</p>
         }
-
-      </main>
-    </div>
+      </ul>
+    </Layout>
   )
 };
 
