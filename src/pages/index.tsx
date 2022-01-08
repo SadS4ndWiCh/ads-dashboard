@@ -10,7 +10,7 @@ const Home: NextPage = () => {
     <Layout 
       title='ADS'
       description='Centralizar informações da faculdade em um só lugar para ficar mais organizado e pela facilidade de acessar'
-      className={styles.homeContainer}
+      className={styles.container}
     >
       <IconLink
         href="/aulas"
