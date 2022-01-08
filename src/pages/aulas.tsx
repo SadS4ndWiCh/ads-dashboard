@@ -3,7 +3,7 @@ import type { GetStaticProps, NextPage } from 'next';
 
 import * as AdsApi from '@lib/ads';
 
-import { Header } from '@components/Header';
+import { Layout } from '@components/Layout';
 import { Link } from '@components/Link';
 import { ClassSchedule } from '@components/ClassSchedule';
 
@@ -44,32 +44,32 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ horaries }) => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <Header
-        title="Aulas de hoje"
-        description="Listagem das aulas do dia e seu horário de início"
-        backTo="/"
-      />
+    <Layout
+      title='Aulas'
+      description='Listagem das aulas do dia e seu horário de início'
+      className={styles.container}
+    >
+      <h3>{ todayClasses && todayClasses.label }</h3>
 
-      <main>
-        <h3>{ todayClasses && todayClasses.label }</h3>
-        { todayClasses && !todayClasses.classesSchedules.length && (
-          <p>Não tem aula</p>
-        ) }
-        { todayClasses && todayClasses.classesSchedules.map((classSchedule, i) => (
-          <ClassSchedule
-            key={`class-${i}`}
-            startTime={classSchedule.startTime}
-            classSubjectName={classSchedule.classSubjectName}
-          />
-        )) }
+      { todayClasses && !todayClasses.classesSchedules.length && (
+        <p>Não tem aula</p>
+      ) }
 
-        <Link
-          href='/horarios'
-          className={styles.seeAllHoraries}
-        >Ver todos horários</Link>
-      </main>
-    </div>
+      { todayClasses && todayClasses.classesSchedules.map((classSchedule, i) => (
+        <ClassSchedule
+          key={`class-${i}`}
+          startTime={classSchedule.startTime}
+          classSubjectName={classSchedule.classSubjectName}
+        />
+      )) }
+
+      <Link
+        href='/horarios'
+        className={styles.seeAllHoraries}
+      >
+        Ver todos horários
+      </Link>
+    </Layout>
   )
 }
 
