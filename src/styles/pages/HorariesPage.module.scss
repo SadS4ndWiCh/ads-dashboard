@@ -1,13 +1,14 @@
-@use '../formats';
 @import '../variables';
 
 .container {
-  @include formats.page;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(36rem, 1fr));
 
-  > div {
+  .weekday {
     margin-bottom: 4.4rem;
   
-    > div {
+    .weekdaySchedule {
+      list-style: none;
       margin-bottom: 1.3rem;
     }
   }
