@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GetStaticProps, NextPage } from 'next';
 
-import { getHoraries, day } from '@lib/ads';
+import * as AdsApi from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { Link } from '@components/Link';
@@ -29,7 +29,7 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ horaries }) => {
   const [todayClasses, setTodayClasses] = useState<IHorary | null>(null);
 
   useEffect(() => {
-    const weekday = day().day();
+    const weekday = AdsApi.day().day();
     if (weekday === 0 || weekday === 6) {
       setTodayClasses({
         id: 0,
@@ -74,7 +74,7 @@ const ClassesPage: NextPage<ClassesPageProps> = ({ horaries }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const horaries = getHoraries('all');
+  const horaries = AdsApi.getHoraries('all');
 
   return {
     props: {

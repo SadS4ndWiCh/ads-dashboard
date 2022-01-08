@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import type { GetStaticProps, NextPage } from 'next';
 
-import { getActivities } from '@lib/ads';
+import * as AdsApi from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { Activity } from '@components/Activity';
@@ -100,7 +100,7 @@ const ActivitiesPage: NextPage<ActivitiesPageProps> = ({ activities }: Activitie
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const activities = await getActivities();
+  const activities = await AdsApi.getActivities();
   
   return {
     props: {

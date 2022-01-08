@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 
-import { day, getHoraries } from '@lib/ads';
+import * as AdsApi from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { ClassSchedule } from '@components/ClassSchedule';
@@ -24,7 +24,7 @@ type HorariesPageProps = {
 };
 
 const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
-  const currentWeekday = day().tz('America/Sao_Paulo').day();
+  const currentWeekday = AdsApi.day().tz('America/Sao_Paulo').day();
 
   return (
     <div className={styles.container}>
@@ -53,7 +53,7 @@ const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const horaries = getHoraries('all');
+  const horaries = AdsApi.getHoraries('all');
 
   return {
     props: {

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { GetStaticProps } from 'next';
 
-import { getNotices } from '@lib/ads';
+import * as AdsApi from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { Notice } from '@components/Notice';
@@ -45,7 +45,7 @@ const NoticesPage: NextPage<NoticesPageProps> = ({ notices }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const notices = await getNotices();
+  const notices = await AdsApi.getNotices();
   
   return {
     props: {

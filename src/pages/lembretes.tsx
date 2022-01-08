@@ -1,6 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next';
 
-import { getReminders } from '@lib/ads';
+import * as AdsApi from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { Reminder } from '@components/Reminder';
@@ -41,7 +41,7 @@ const RemindersPage: NextPage<RemindersPageProps> = ({ reminders }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const reminders = await getReminders();
+  const reminders = await AdsApi.getReminders();
 
   return {
     props: {

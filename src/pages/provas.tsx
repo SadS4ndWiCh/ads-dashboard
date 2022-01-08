@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import type { GetStaticProps, NextPage } from 'next';
 
-import { getExams } from '@lib/ads';
+import * as AdsApi from '@lib/ads';
 
 import { Header } from '@components/Header';
 import { Exam } from '@components/Exam';
@@ -110,7 +110,7 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const exams = await getExams();
+  const exams = await AdsApi.getExams();
   
   return {
     props: {
