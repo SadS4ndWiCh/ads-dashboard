@@ -9,6 +9,7 @@ import { Exam } from '@components/Exam';
 import { Select } from '@components/Select';
 
 import styles from '@styles/pages/ExamsPage.module.scss';
+import { Layout } from '@components/Layout';
 
 interface IExamTag {
   id: string;
@@ -58,13 +59,11 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
   }, [tags]);
 
   return (
-    <div className={styles.container}>
-      <Header
-        title="Provas"
-        description="Listagem das provas e da data de realização"
-        backTo="/"
-      />
-
+    <Layout
+      title='Provas'
+      description='Listagem das provas e da data de realização'
+      className={styles.container}
+    >
       <div className={styles.filters}>
         <Select
           options={[
@@ -90,22 +89,25 @@ const ExamsPage: NextPage<ExamsPageProps> = ({ exams }) => {
         />
       </div>
 
-      <main>
+      <ul className={styles.examsList}>
         { 
           examsToShow.length ?
             examsToShow.map((exam, i) => (
-              <Exam
+              <li
                 key={`exam-${i}`}
-                examTags={exam.tags.filter(tag => tag.name.match(tagRegex))}
-                examName={exam.name}
-                examDate={exam.date}
-                isDone={exam.isDone}
-              />
+              >
+                <Exam
+                  examTags={exam.tags.filter(tag => tag.name.match(tagRegex))}
+                  examName={exam.name}
+                  examDate={exam.date}
+                  isDone={exam.isDone}
+                />
+              </li>
             )) :
             <p>Sem provas</p>
         }
-      </main>
-    </div>
+      </ul>
+    </Layout>
   )
 }
 
