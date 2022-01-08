@@ -2,7 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 
 import * as AdsApi from '@lib/ads';
 
-import { Header } from '@components/Header';
+import { Layout } from '@components/Layout';
 import { ClassSchedule } from '@components/ClassSchedule';
 
 import styles from '@styles/pages/HorariesPage.module.scss';
@@ -27,28 +27,36 @@ const HorariesPage: NextPage<HorariesPageProps> = ({ horaries }) => {
   const currentWeekday = AdsApi.day().tz('America/Sao_Paulo').day();
 
   return (
-    <div className={styles.container}>
-      <Header
-        title="Horários"
-        description="Listagem do cronograma completo da semana"
-        backTo="/"
-      />
-
+    <Layout
+      title='Horários'
+      description='Listagem do cronograma completo da semana'
+      className={styles.container}
+    >
       { horaries.map((horary, i) => (
-        <div key={`horary-${i}`}>
+        <section
+          key={`horary-${i}`}
+          className={styles.weekday}
+        >
           <h3>{ horary.label } { horary.weekday === currentWeekday && (
             <span className={styles.isToday}>• Hoje</span>
           ) }</h3>
-          { horary.classesSchedules.map((classSchedule, i) => (
-            <ClassSchedule
-              key={`class-${i}`}
-              startTime={classSchedule.startTime}
-              classSubjectName={classSchedule.classSubjectName}
-            />
-          )) }
-        </div>
+
+          <ul>
+            { horary.classesSchedules.map((classSchedule, i) => (
+              <li
+                key={`class-${i}`}
+                className={styles.weekdaySchedule}
+              >
+                <ClassSchedule
+                  startTime={classSchedule.startTime}
+                  classSubjectName={classSchedule.classSubjectName}
+                />
+              </li>
+            )) }
+          </ul>
+        </section>
       )) }
-    </div>
+    </Layout>
   )
 };
 
