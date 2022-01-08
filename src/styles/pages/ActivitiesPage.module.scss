@@ -1,10 +1,7 @@
-@use '../formats';
 @import '../variables';
 
 .container {
-  @include formats.page;
-
-  main {
+  .activitiesList {
     display: flex;
     flex-direction: column;
 
